@@ -8,18 +8,46 @@ using MySql.Data.MySqlClient;
 
 namespace featherlib
 {
+    enum DbConnectionStatus
+    {
+        CONNECTED,
+        UNAUTHORIZED,
+        UNINITIALIZED,
+        UNCONNECTED
+    }
+
     class DbConnection
     {
         protected string connectionString;
 
         protected MySqlConnection db;
 
+        protected DbConnectionStatus connectionStatus = DbConnectionStatus.UNINITIALIZED;
+
+        protected string lastErrMsg;
+
         public DbConnection(string host, string port, string database, string user, string password)
         {
             this.connectionString = "server=" + host + ";port=" + port + ";userid="
-                + user + ";password=" + password + ";database=" + database;
+                + user + ";password=" + password + "dad;database=" + database;
             this.db = new MySql.Data.MySqlClient.MySqlConnection(this.connectionString);
-            this.db.Open();
+
+            try
+            {
+                this.db.Open();
+                this.connectionStatus = DbConnectionStatus.CONNECTED;
+            }
+            catch (MySqlException ex)
+            {
+                if (ex.Message.Contains("Authentication"))
+                {
+                    this.connectionStatus = DbConnectionStatus.UNAUTHORIZED;
+                } else
+                {
+                    this.connectionStatus = DbConnectionStatus.UNCONNECTED;
+                }
+                this.lastErrMsg = ex.Message;
+            }
         }
 
         public static DbConnection fromConfig(KeyValueConfigurationCollection conf)
