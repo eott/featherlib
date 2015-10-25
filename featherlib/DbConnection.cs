@@ -60,5 +60,20 @@ namespace featherlib
                 conf["db_password"].Value
             );
         }
+
+        public MySqlDataReader query(string sql, Dictionary<string, string> parameters)
+        {
+            MySqlCommand query = new MySqlCommand();
+            query.Connection = db;
+            query.CommandText = sql;
+            query.Prepare();
+
+            foreach (KeyValuePair<string, string> p in parameters)
+            {
+                query.Parameters.AddWithValue(p.Key, p.Value);
+            }
+
+            return query.ExecuteReader();
+        }
     }
 }
