@@ -25,19 +25,33 @@ namespace featherlib
             this.name = name;
         }
 
-        public static User fromDatabase(DbConnection db, string email)
+        protected static User fromDatabase(DbConnection db, int id, string email)
         {
-            string sql = @"
+            // @TODO: Replace this with a constructed query as they differ only in the
+            // where clause and parameters
+            string sql = "";
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+
+            if (id == 0)
+            {
+                sql = @"
                 SELECT u.user_id, u.email, u.user_name
                 FROM user u
                 WHERE u.email = :email
                 LIMIT 1
-            ";
-
-            Dictionary<string, string> parameters = new Dictionary<string, string>()
+                ";
+                parameters[":id"] = id.ToString();
+            }
+            else
             {
-                {":email", email}
-            };
+                sql = @"
+                SELECT u.user_id, u.email, u.user_name
+                FROM user u
+                WHERE u.email = :email
+                LIMIT 1
+                ";
+                parameters[":email"] = email;
+            }
 
             MySqlDataReader reader = db.query(sql, parameters);
 
@@ -51,6 +65,16 @@ namespace featherlib
             {
                 throw new Exception("User with email \"" + email + "\" not found.");
             }
+        }
+
+        public static User fromDatabase(DbConnection db, int id)
+        {
+            return User.fromDatabase(db, id, "");
+        }
+
+        public static User fromDatabase(DbConnection db, string email)
+        {
+            return User.fromDatabase(db, 0, email);
         }
     }
 }
