@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbConnection.cs" />
+    <Compile Include="Library.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
