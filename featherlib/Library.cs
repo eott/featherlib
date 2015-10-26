@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using MySql.Data.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,16 +12,21 @@ namespace featherlib
     {
         protected DbConnection db;
 
-        public Library(DbConnection db)
+        protected int id;
+
+        protected User owner;
+
+        protected MySqlDateTime created;
+
+        public Library(DbConnection db, int id, User owner, MySqlDateTime created)
         {
             this.db = db;
         }
 
         public static Library fromDatabase(DbConnection db, string name)
         {
-            // Test functionality
             string sql = @"
-                SELECT *
+                SELECT library_id, owner_id, created
                 FROM library l
                 WHERE l.name = :name
                 LIMIT 1
@@ -35,8 +41,14 @@ namespace featherlib
 
             if (reader.Read())
             {
-                return new Library(db);
-            } else
+                int libId = reader.GetInt32(0);
+                int userId = reader.GetInt32(1);
+                MySqlDateTime created = reader.GetMySqlDateTime(2);
+                User owner = User.fromDatabase(db, userId);
+
+                return new Library(db, libId, owner, created);
+            }
+            else
             {
                 throw new Exception("Library with name \"" + name + "\" not found.");
             }
