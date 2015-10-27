@@ -18,39 +18,44 @@ namespace featherlib
 
         protected MySqlDateTime created;
 
-        public Library(DbConnection db, int id, User owner, MySqlDateTime created)
+        protected string name;
+
+        public Library(DbConnection db, int id, User owner, MySqlDateTime created, string name)
         {
             this.db = db;
+            this.id = id;
+            this.owner = owner;
+            this.created = created;
+            this.name = name;
         }
 
-        public static Library fromDatabase(DbConnection db, string name)
+        public static Library fromDatabase(DbConnection db, int id)
         {
             string sql = @"
-                SELECT library_id, owner_id, created
+                SELECT owner_id, created, name
                 FROM library l
-                WHERE l.name = :name
-                LIMIT 1
+                WHERE l.library_id = :id
             ";
 
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
-                {":name", name}
+                {":id", id.ToString()}
             };
 
             MySqlDataReader reader = db.query(sql, parameters);
 
             if (reader.Read())
             {
-                int libId = reader.GetInt32(0);
-                int userId = reader.GetInt32(1);
-                MySqlDateTime created = reader.GetMySqlDateTime(2);
+                int userId = reader.GetInt32(0);
+                MySqlDateTime created = reader.GetMySqlDateTime(1);
+                string name = reader.GetString(2);
                 User owner = User.fromDatabase(db, userId);
 
-                return new Library(db, libId, owner, created);
+                return new Library(db, id, owner, created, name);
             }
             else
             {
-                throw new Exception("Library with name \"" + name + "\" not found.");
+                throw new Exception("Library with name " + id.ToString() + " not found.");
             }
         }
     }
