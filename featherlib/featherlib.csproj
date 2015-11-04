@@ -69,6 +69,7 @@
     <Compile Include="Client.cs" />
     <Compile Include="DbConnection.cs" />
     <Compile Include="Library.cs" />
+    <Compile Include="LibraryItem.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
