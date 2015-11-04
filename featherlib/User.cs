@@ -9,17 +9,14 @@ namespace featherlib
 {
     public class User
     {
-        protected DbConnection db;
-
         protected int userId;
 
         protected string email;
 
         protected string name = "";
 
-        public User(DbConnection db, int id, string email, string name)
+        public User(int id, string email, string name)
         {
-            this.db = db;
             this.userId = id;
             this.email = email;
             this.name = name;
@@ -59,7 +56,7 @@ namespace featherlib
             {
                 int userId = reader.GetInt32(0);
                 string name = reader.GetString(2);
-                return new User(db, userId, email, name);
+                return new User(userId, email, name);
             }
             else
             {

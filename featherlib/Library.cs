@@ -10,8 +10,6 @@ namespace featherlib
 {
     public class Library
     {
-        protected DbConnection db;
-
         protected int id;
 
         protected User owner;
@@ -20,9 +18,8 @@ namespace featherlib
 
         protected string name;
 
-        public Library(DbConnection db, int id, User owner, MySqlDateTime created, string name)
+        public Library(int id, User owner, MySqlDateTime created, string name)
         {
-            this.db = db;
             this.id = id;
             this.owner = owner;
             this.created = created;
@@ -51,7 +48,7 @@ namespace featherlib
                 string name = reader.GetString(2);
                 User owner = User.fromDatabase(db, userId);
 
-                return new Library(db, id, owner, created, name);
+                return new Library(id, owner, created, name);
             }
             else
             {
