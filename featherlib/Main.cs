@@ -24,5 +24,13 @@ namespace featherlib
         {
             this.Close();
         }
+
+        private void main_Load(object sender, EventArgs e)
+        {
+            foreach (Library lib in this.client.getLibraries())
+            {
+                nav_tree.Nodes.Add(new TreeNode(lib.ToString()));
+            }
+        }
     }
 }

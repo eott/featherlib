@@ -153,6 +153,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "main";
             this.Text = "featherlib";
+            this.Load += new System.EventHandler(this.main_Load);
             this.main_layout.ResumeLayout(false);
             this.menu_layout.ResumeLayout(false);
             this.menu_layout.PerformLayout();
