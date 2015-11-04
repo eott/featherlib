@@ -29,7 +29,7 @@ namespace featherlib
         {
             foreach (Library lib in this.client.getLibraries())
             {
-                nav_tree.Nodes.Add(new TreeNode(lib.ToString()));
+                nav_tree.Nodes.Add(new TreeNode(lib.name));
             }
         }
     }
