@@ -12,8 +12,11 @@ namespace featherlib
 {
     public partial class main : Form
     {
-        public main()
+        protected Client client;
+
+        public main(Client client)
         {
+            this.client = client;
             InitializeComponent();
         }
 
