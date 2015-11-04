@@ -8,11 +8,11 @@ namespace featherlib
 {
     public class LibraryItem
     {
-        protected int libraryItemId;
+        public int libraryItemId { get; set; }
 
-        protected Library library;
+        public Library library { get; set; }
 
-        protected string name;
+        public string name { get; set; }
 
         public LibraryItem(int id, Library library, string name)
         {

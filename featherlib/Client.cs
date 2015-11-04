@@ -8,7 +8,7 @@ namespace featherlib
 {
     public class Client
     {
-        protected Server server;
+        public Server server { get; set; }
 
         public Client(Server serv)
         {

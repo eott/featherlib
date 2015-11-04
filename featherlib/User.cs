@@ -9,11 +9,11 @@ namespace featherlib
 {
     public class User
     {
-        protected int userId;
+        public int userId { get; set; }
 
-        protected string email;
+        public string email { get; set; }
 
-        protected string name = "";
+        public string name { get; set; }
 
         public User(int id, string email, string name)
         {

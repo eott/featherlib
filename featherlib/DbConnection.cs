@@ -18,16 +18,18 @@ namespace featherlib
 
     public class DbConnection
     {
-        protected string connectionString;
+        public string connectionString { get; set; }
 
-        protected MySqlConnection db;
+        public MySqlConnection db { get; set; }
 
-        protected DbConnectionStatus connectionStatus = DbConnectionStatus.UNINITIALIZED;
+        public DbConnectionStatus connectionStatus { get; set; }
 
-        protected string lastErrMsg;
+        public string lastErrMsg { get; set; }
 
         public DbConnection(string host, string port, string database, string user, string password)
         {
+            this.connectionStatus = DbConnectionStatus.UNINITIALIZED;
+
             this.connectionString = "server=" + host + ";port=" + port + ";userid="
                 + user + ";password=" + password + "dad;database=" + database;
             this.db = new MySql.Data.MySqlClient.MySqlConnection(this.connectionString);
@@ -42,7 +44,8 @@ namespace featherlib
                 if (ex.Message.Contains("Authentication"))
                 {
                     this.connectionStatus = DbConnectionStatus.UNAUTHORIZED;
-                } else
+                }
+                else
                 {
                     this.connectionStatus = DbConnectionStatus.UNCONNECTED;
                 }

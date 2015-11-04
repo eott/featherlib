@@ -10,13 +10,13 @@ namespace featherlib
 {
     public class Library
     {
-        protected int id;
+        public int id { get; set; }
 
-        protected User owner;
+        public User owner { get; set; }
 
-        protected MySqlDateTime created;
+        public MySqlDateTime created { get; set; }
 
-        protected string name;
+        public string name { get; set; }
 
         public Library(int id, User owner, MySqlDateTime created, string name)
         {

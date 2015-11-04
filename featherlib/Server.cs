@@ -8,7 +8,7 @@ namespace featherlib
 {
     public class Server
     {
-        protected DbConnection db;
+        public DbConnection db { get; set; }
 
         public Server(DbConnection db)
         {
