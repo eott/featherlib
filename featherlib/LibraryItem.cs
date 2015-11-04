@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace featherlib
 {
-    class LibraryItem
+    public class LibraryItem
     {
         protected int libraryItemId;
 

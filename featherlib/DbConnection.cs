@@ -8,7 +8,7 @@ using MySql.Data.MySqlClient;
 
 namespace featherlib
 {
-    enum DbConnectionStatus
+    public enum DbConnectionStatus
     {
         CONNECTED,
         UNAUTHORIZED,
@@ -16,7 +16,7 @@ namespace featherlib
         UNCONNECTED
     }
 
-    class DbConnection
+    public class DbConnection
     {
         protected string connectionString;
 

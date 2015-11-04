@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace featherlib
 {
-    class User
+    public class User
     {
         protected DbConnection db;
 
