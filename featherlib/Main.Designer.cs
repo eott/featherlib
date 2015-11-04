@@ -106,25 +106,25 @@
             // loadLibraryToolStripMenuItem
             // 
             this.loadLibraryToolStripMenuItem.Name = "loadLibraryToolStripMenuItem";
-            this.loadLibraryToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.loadLibraryToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
             this.loadLibraryToolStripMenuItem.Text = "Load library";
             // 
             // saveLibraryToolStripMenuItem
             // 
             this.saveLibraryToolStripMenuItem.Name = "saveLibraryToolStripMenuItem";
-            this.saveLibraryToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.saveLibraryToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
             this.saveLibraryToolStripMenuItem.Text = "Save library";
             // 
             // createLibraryToolStripMenuItem
             // 
             this.createLibraryToolStripMenuItem.Name = "createLibraryToolStripMenuItem";
-            this.createLibraryToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.createLibraryToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
             this.createLibraryToolStripMenuItem.Text = "Create library";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -139,7 +139,7 @@
             // connectionToolStripMenuItem
             // 
             this.connectionToolStripMenuItem.Name = "connectionToolStripMenuItem";
-            this.connectionToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.connectionToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
             this.connectionToolStripMenuItem.Text = "Connection";
             // 
             // main
