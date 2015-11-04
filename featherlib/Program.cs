@@ -20,6 +20,7 @@ namespace featherlib
 
             DbConnection connection = DbConnection.fromConfig(settings);
             Server server = new Server(connection);
+            Client client = new Client(server);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
