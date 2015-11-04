@@ -19,6 +19,7 @@ namespace featherlib
             KeyValueConfigurationCollection settings = config.AppSettings.Settings;
 
             DbConnection connection = DbConnection.fromConfig(settings);
+            Server server = new Server(connection);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
