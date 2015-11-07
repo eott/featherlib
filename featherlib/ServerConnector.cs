@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace featherlib
 {
+    public enum ObjectIdentifier
+    {
+        Library,
+        LibraryItem,
+        User
+    }
+
     public class ServerConnector
     {
         public Server server { get; set; }
