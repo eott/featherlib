@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Client.cs" />
     <Compile Include="DbConnection.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="Library.cs" />
     <Compile Include="LibraryItem.cs" />
     <Compile Include="Main.cs">
