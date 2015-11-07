@@ -8,11 +8,11 @@ namespace featherlib
 {
     public class Client
     {
-        public Server server { get; set; }
+        public ServerConnector connector { get; set; }
 
-        public Client(Server serv)
+        public Client(ServerConnector conn)
         {
-            this.server = serv;
+            this.connector = conn;
         }
 
         public List<Library> getLibraries()
