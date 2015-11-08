@@ -37,7 +37,7 @@ namespace featherlib
                 FROM user u
             ";
 
-            if (!singular)
+            if (singular)
             {
                 sql += "WHERE user_id = :id";
             }

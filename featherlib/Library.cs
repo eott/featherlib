@@ -43,7 +43,7 @@ namespace featherlib
                 FROM library l
             ";
 
-            if (!singular)
+            if (singular)
             {
                 sql += "WHERE library_id = :id";
             }

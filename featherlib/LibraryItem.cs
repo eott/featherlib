@@ -37,7 +37,7 @@ namespace featherlib
                 FROM library_item li
             ";
 
-            if (!singular)
+            if (singular)
             {
                 sql += "WHERE library_item_id = :id";
             }
