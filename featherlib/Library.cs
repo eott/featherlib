@@ -12,16 +12,16 @@ namespace featherlib
     {
         public int id { get; set; }
 
-        public User owner { get; set; }
+        public int ownerId { get; set; }
 
-        public MySqlDateTime created { get; set; }
+        public DateTime created { get; set; }
 
         public string name { get; set; }
 
-        public Library(int id, User owner, MySqlDateTime created, string name)
+        public Library(int id, int userId, DateTime created, string name)
         {
             this.id = id;
-            this.owner = owner;
+            this.ownerId = userId;
             this.created = created;
             this.name = name;
         }
@@ -44,11 +44,10 @@ namespace featherlib
             if (reader.Read())
             {
                 int userId = reader.GetInt32(0);
-                MySqlDateTime created = reader.GetMySqlDateTime(1);
+                DateTime created = reader.GetDateTime(1);
                 string name = reader.GetString(2);
-                User owner = User.fromDatabase(db, userId);
 
-                return new Library(id, owner, created, name);
+                return new Library(id, userId, created, name);
             }
             else
             {
