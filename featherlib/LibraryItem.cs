@@ -10,15 +10,46 @@ namespace featherlib
     {
         public int libraryItemId { get; set; }
 
-        public Library library { get; set; }
+        public int libraryId { get; set; }
 
         public string name { get; set; }
 
-        public LibraryItem(int id, Library library, string name)
+        public LibraryItem(int id, int libraryId, string name)
         {
             this.libraryItemId = id;
-            this.library = library;
+            this.libraryId = libraryId;
             this.name = name;
+        }
+
+        public static LibraryItem fromResultSet(ResultSet data)
+        {
+            if (data.read())
+            {
+                return new LibraryItem(
+                    data.getInt32(0),
+                    data.getInt32(1),
+                    data.getString(2)
+                );
+            }
+            else
+            {
+                throw new EmptyResultSetException("Cannot construct library item from empty result set.");
+            }
+        }
+
+        public static string getSelectQuery(bool singular)
+        {
+            string sql = @"
+                SELECT library_item_id, library_id, name
+                FROM library_item li
+            ";
+
+            if (!singular)
+            {
+                sql += "WHERE library_item_id = :id";
+            }
+
+            return sql;
         }
     }
 }
