@@ -10,4 +10,9 @@ namespace featherlib
     {
         public EmptyResultSetException(string msg) : base(msg) { }
     }
+
+    public class NoServerConnectionException : Exception
+    {
+        public NoServerConnectionException(string msg) : base(msg) { }
+    }
 }
