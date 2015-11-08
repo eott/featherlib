@@ -42,5 +42,20 @@ namespace featherlib
                 throw new EmptyResultSetException("Cannot construct library from empty result set.");
             }
         }
+
+        public static string getSelectQuery(bool singular)
+        {
+            string sql = @"
+                SELECT library_id, owner_id, created, name
+                FROM library l
+            ";
+
+            if (!singular)
+            {
+                sql += "WHERE library_id = :id";
+            }
+
+            return sql;
+        }
     }
 }

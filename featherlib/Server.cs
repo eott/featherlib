@@ -26,19 +26,12 @@ namespace featherlib
                 case ObjectIdentifier.Library:
                     if (parameters.ContainsKey("id"))
                     {
-                        sql = @"
-                            SELECT owner_id, created, name
-                            FROM library l
-                            WHERE l.library_id = :id
-                        ";
+                        sql = Library.getSelectQuery(true);
                         pars["id"] = parameters["id"];
                     }
                     else
                     {
-                        sql = @"
-                            SELECT owner_id, created, name
-                            FROM library l
-                        ";
+                        sql = Library.getSelectQuery(false);
                     }
                     break;
 
