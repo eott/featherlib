@@ -26,32 +26,20 @@ namespace featherlib
             this.name = name;
         }
 
-        public static Library fromDatabase(DbConnection db, int id)
+        public static Library fromResultSet(ResultSet data)
         {
-            string sql = @"
-                SELECT owner_id, created, name
-                FROM library l
-                WHERE l.library_id = :id
-            ";
-
-            Dictionary<string, string> parameters = new Dictionary<string, string>()
+            if (data.read())
             {
-                {":id", id.ToString()}
-            };
-
-            MySqlDataReader reader = db.query(sql, parameters);
-
-            if (reader.Read())
-            {
-                int userId = reader.GetInt32(0);
-                DateTime created = reader.GetDateTime(1);
-                string name = reader.GetString(2);
-
-                return new Library(id, userId, created, name);
+                return new Library(
+                    data.getInt32(0),
+                    data.getInt32(1),
+                    data.getDateTime(2),
+                    data.getString(3)
+                );
             }
             else
             {
-                throw new Exception("Library with name " + id.ToString() + " not found.");
+                throw new EmptyResultSetException("Cannot construct library from empty result set.");
             }
         }
     }
