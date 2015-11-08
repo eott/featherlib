@@ -35,6 +35,30 @@ namespace featherlib
                     }
                     break;
 
+                case ObjectIdentifier.LibraryItem:
+                    if (parameters.ContainsKey("id"))
+                    {
+                        sql = LibraryItem.getSelectQuery(true);
+                        pars["id"] = parameters["id"];
+                    }
+                    else
+                    {
+                        sql = LibraryItem.getSelectQuery(false);
+                    }
+                    break;
+
+                case ObjectIdentifier.User:
+                    if (parameters.ContainsKey("id"))
+                    {
+                        sql = User.getSelectQuery(true);
+                        pars["id"] = parameters["id"];
+                    }
+                    else
+                    {
+                        sql = User.getSelectQuery(false);
+                    }
+                    break;
+
                 default:
                     throw new NotSupportedException("Given ObjectIdentifier is not supported.");
             }
