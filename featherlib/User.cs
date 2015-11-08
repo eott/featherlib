@@ -21,57 +21,35 @@ namespace featherlib
             this.email = email;
             this.name = name;
         }
-
-        protected static User fromDatabase(DbConnection db, int id, string email)
+        public static User fromResultSet(ResultSet data)
         {
-            // @TODO: Replace this with a constructed query as they differ only in the
-            // where clause and parameters
-            string sql = "";
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
-
-            if (id == 0)
+            if (data.read())
             {
-                sql = @"
-                SELECT u.user_id, u.email, u.user_name
-                FROM user u
-                WHERE u.email = :email
-                LIMIT 1
-                ";
-                parameters[":id"] = id.ToString();
+                return new User(
+                    data.getInt32(0),
+                    data.getString(1),
+                    data.getString(2)
+                );
             }
             else
             {
-                sql = @"
-                SELECT u.user_id, u.email, u.user_name
+                throw new EmptyResultSetException("Cannot construct user from empty result set.");
+            }
+        }
+
+        public static string getSelectQuery(bool singular)
+        {
+            string sql = @"
+                SELECT user_id, email, user_name
                 FROM user u
-                WHERE u.email = :email
-                LIMIT 1
-                ";
-                parameters[":email"] = email;
-            }
+            ";
 
-            MySqlDataReader reader = db.query(sql, parameters);
-
-            if (reader.Read())
+            if (!singular)
             {
-                int userId = reader.GetInt32(0);
-                string name = reader.GetString(2);
-                return new User(userId, email, name);
+                sql += "WHERE user_id = :id";
             }
-            else
-            {
-                throw new Exception("User with email \"" + email + "\" not found.");
-            }
-        }
 
-        public static User fromDatabase(DbConnection db, int id)
-        {
-            return User.fromDatabase(db, id, "");
-        }
-
-        public static User fromDatabase(DbConnection db, string email)
-        {
-            return User.fromDatabase(db, 0, email);
+            return sql;
         }
     }
 }
