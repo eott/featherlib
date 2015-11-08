@@ -18,6 +18,12 @@ namespace featherlib
         public List<Library> getLibraries()
         {
             List<Library> list = new List<Library>();
+            ResultSet result = this.connector.getResultSetFor(ObjectIdentifier.Library, new Dictionary<string, string>());
+            while (result.read())
+            {
+                Library lib = Library.fromResultSet(result);
+                list.Add(lib);
+            }
             return list;
         }
     }
