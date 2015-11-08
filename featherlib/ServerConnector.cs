@@ -14,5 +14,16 @@ namespace featherlib
         {
             this.server = server;
         }
+
+        public ResultSet getResultSetFor(ObjectIdentifier ident, Dictionary<string, string> parameters)
+        {
+            if (this.server != null)
+            {
+                return new ResultSet(this.server.getDataReaderFor(ident, parameters));
+            } else
+            {
+                throw new NoServerConnectionException("Could not fetch result set because no server was set.");
+            }
+        }
     }
 }
