@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace featherlib
 {
-    class ResultSet
+    public class ResultSet
     {
         public MySqlDataReader reader { get; set; }
         public List<List<string>> rows { get; set; }
