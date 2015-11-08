@@ -23,7 +23,7 @@ namespace featherlib
             this.connectionStatus = DbConnectionStatus.UNINITIALIZED;
 
             this.connectionString = "server=" + host + ";port=" + port + ";userid="
-                + user + ";password=" + password + "dad;database=" + database;
+                + user + ";password=" + password + ";database=" + database;
             this.db = new MySql.Data.MySqlClient.MySqlConnection(this.connectionString);
 
             try
