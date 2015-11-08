@@ -23,18 +23,11 @@ namespace featherlib
 
         public static LibraryItem fromResultSet(ResultSet data)
         {
-            if (data.read())
-            {
-                return new LibraryItem(
-                    data.getInt32(0),
-                    data.getInt32(1),
-                    data.getString(2)
-                );
-            }
-            else
-            {
-                throw new EmptyResultSetException("Cannot construct library item from empty result set.");
-            }
+            return new LibraryItem(
+                data.getInt32(0),
+                data.getInt32(1),
+                data.getString(2)
+            );
         }
 
         public static string getSelectQuery(bool singular)
