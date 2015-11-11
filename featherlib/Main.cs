@@ -12,11 +12,11 @@ namespace featherlib
 {
     public partial class main : Form
     {
-        protected Client client;
+        protected Client Client;
 
         public main(Client client)
         {
-            this.client = client;
+            this.Client = client;
             InitializeComponent();
         }
 
@@ -27,9 +27,9 @@ namespace featherlib
 
         private void main_Load(object sender, EventArgs e)
         {
-            foreach (Library lib in this.client.getLibraries())
+            foreach (Library lib in this.Client.GetLibraries())
             {
-                nav_tree.Nodes.Add(new TreeNode(lib.name));
+                nav_tree.Nodes.Add(new TreeNode(lib.Name));
             }
         }
     }

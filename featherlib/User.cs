@@ -9,28 +9,28 @@ namespace featherlib
 {
     public class User
     {
-        public int userId { get; set; }
+        public int UserId { get; set; }
 
-        public string email { get; set; }
+        public string Email { get; set; }
 
-        public string name { get; set; }
+        public string Name { get; set; }
 
         public User(int id, string email, string name)
         {
-            this.userId = id;
-            this.email = email;
-            this.name = name;
+            this.UserId = id;
+            this.Email = email;
+            this.Name = name;
         }
-        public static User fromResultSet(ResultSet data)
+        public static User FromResultSet(ResultSet data)
         {
             return new User(
-                data.getInt32(0),
-                data.getString(1),
-                data.getString(2)
+                data.GetInt32(0),
+                data.GetString(1),
+                data.GetString(2)
             );
         }
 
-        public static string getSelectQuery(bool singular)
+        public static string GetSelectQuery(bool singular)
         {
             string sql = @"
                 SELECT user_id, email, user_name

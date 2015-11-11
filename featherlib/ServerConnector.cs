@@ -8,18 +8,18 @@ namespace featherlib
 {
     public class ServerConnector
     {
-        public Server server { get; set; }
+        public Server Server { get; set; }
 
         public ServerConnector(Server server)
         {
-            this.server = server;
+            this.Server = server;
         }
 
-        public ResultSet getResultSetFor(ObjectIdentifier ident, Dictionary<string, string> parameters)
+        public ResultSet GetResultSetFor(ObjectIdentifier ident, Dictionary<string, string> parameters)
         {
-            if (this.server != null)
+            if (this.Server != null)
             {
-                return new ResultSet(this.server.getDataReaderFor(ident, parameters));
+                return new ResultSet(this.Server.GetDataReaderFor(ident, parameters));
             } else
             {
                 throw new NoServerConnectionException("Could not fetch result set because no server was set.");

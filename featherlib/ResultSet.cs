@@ -9,32 +9,32 @@ namespace featherlib
 {
     public class ResultSet
     {
-        public MySqlDataReader reader { get; set; }
-        public List<List<string>> rows { get; set; }
-        protected int listIndex;
+        public MySqlDataReader Reader { get; set; }
+        public List<List<string>> Rows { get; set; }
+        protected int ListIndex;
 
         public ResultSet(MySqlDataReader reader)
         {
-            this.reader = reader;
+            this.Reader = reader;
         }
 
         public ResultSet(List<List<string>> rows)
         {
-            this.rows = rows;
-            this.listIndex = -1;
+            this.Rows = rows;
+            this.ListIndex = -1;
         }
 
-        public bool read()
+        public bool Read()
         {
-            if (this.reader != null)
+            if (this.Reader != null)
             {
-                return this.reader.Read();
+                return this.Reader.Read();
             }
-            else if (this.rows != null)
+            else if (this.Rows != null)
             {
-                if (this.listIndex < this.rows.Count - 1)
+                if (this.ListIndex < this.Rows.Count - 1)
                 {
-                    this.listIndex++;
+                    this.ListIndex++;
                     return true;
                 }
                 else
@@ -48,29 +48,29 @@ namespace featherlib
             }
         }
 
-        public int getInt32(int index)
+        public int GetInt32(int index)
         {
-            if (this.reader != null)
+            if (this.Reader != null)
             {
-                return this.reader.GetInt32(index);
-            } else if (this.rows != null)
+                return this.Reader.GetInt32(index);
+            } else if (this.Rows != null)
             {
-                return int.Parse(this.rows[this.listIndex][index]);
+                return int.Parse(this.Rows[this.ListIndex][index]);
             } else
             {
                 throw new EmptyResultSetException("Tried to access field of an empty ResultSet instance with no underlying data structure.");
             }
         }
 
-        public string getString(int index)
+        public string GetString(int index)
         {
-            if (this.reader != null)
+            if (this.Reader != null)
             {
-                return this.reader.GetString(index);
+                return this.Reader.GetString(index);
             }
-            else if (this.rows != null)
+            else if (this.Rows != null)
             {
-                return this.rows[this.listIndex][index];
+                return this.Rows[this.ListIndex][index];
             }
             else
             {
@@ -78,15 +78,15 @@ namespace featherlib
             }
         }
 
-        public DateTime getDateTime(int index)
+        public DateTime GetDateTime(int index)
         {
-            if (this.reader != null)
+            if (this.Reader != null)
             {
-                return this.reader.GetDateTime(index);
+                return this.Reader.GetDateTime(index);
             }
-            else if (this.rows != null)
+            else if (this.Rows != null)
             {
-                return DateTime.Parse(this.rows[this.listIndex][index]);
+                return DateTime.Parse(this.Rows[this.ListIndex][index]);
             }
             else
             {

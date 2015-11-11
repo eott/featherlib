@@ -8,20 +8,20 @@ namespace featherlib
 {
     public class Client
     {
-        public ServerConnector connector { get; set; }
+        public ServerConnector Connector { get; set; }
 
         public Client(ServerConnector conn)
         {
-            this.connector = conn;
+            this.Connector = conn;
         }
 
-        public List<Library> getLibraries()
+        public List<Library> GetLibraries()
         {
             List<Library> list = new List<Library>();
-            ResultSet result = this.connector.getResultSetFor(ObjectIdentifier.Library, new Dictionary<string, string>());
-            while (result.read())
+            ResultSet result = this.Connector.GetResultSetFor(ObjectIdentifier.Library, new Dictionary<string, string>());
+            while (result.Read())
             {
-                Library lib = Library.fromResultSet(result);
+                Library lib = Library.FromResultSet(result);
                 list.Add(lib);
             }
             return list;

@@ -9,14 +9,14 @@ namespace featherlib
 {
     public class Server
     {
-        public DbConnection db { get; set; }
+        public DbConnection Db { get; set; }
 
         public Server(DbConnection db)
         {
-            this.db = db;
+            this.Db = db;
         }
 
-        public MySqlDataReader getDataReaderFor(ObjectIdentifier ident, Dictionary<string, string> parameters)
+        public MySqlDataReader GetDataReaderFor(ObjectIdentifier ident, Dictionary<string, string> parameters)
         {
             string sql = "";
             Dictionary<string, string> pars = new Dictionary<string, string>();
@@ -26,36 +26,36 @@ namespace featherlib
                 case ObjectIdentifier.Library:
                     if (parameters.ContainsKey("id"))
                     {
-                        sql = Library.getSelectQuery(true);
+                        sql = Library.GetSelectQuery(true);
                         pars["id"] = parameters["id"];
                     }
                     else
                     {
-                        sql = Library.getSelectQuery(false);
+                        sql = Library.GetSelectQuery(false);
                     }
                     break;
 
                 case ObjectIdentifier.LibraryItem:
                     if (parameters.ContainsKey("id"))
                     {
-                        sql = LibraryItem.getSelectQuery(true);
+                        sql = LibraryItem.GetSelectQuery(true);
                         pars["id"] = parameters["id"];
                     }
                     else
                     {
-                        sql = LibraryItem.getSelectQuery(false);
+                        sql = LibraryItem.GetSelectQuery(false);
                     }
                     break;
 
                 case ObjectIdentifier.User:
                     if (parameters.ContainsKey("id"))
                     {
-                        sql = User.getSelectQuery(true);
+                        sql = User.GetSelectQuery(true);
                         pars["id"] = parameters["id"];
                     }
                     else
                     {
-                        sql = User.getSelectQuery(false);
+                        sql = User.GetSelectQuery(false);
                     }
                     break;
 
@@ -63,7 +63,7 @@ namespace featherlib
                     throw new NotSupportedException("Given ObjectIdentifier is not supported.");
             }
 
-            return this.db.query(sql, pars);
+            return this.Db.Query(sql, pars);
         }
     }
 }

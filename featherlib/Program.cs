@@ -18,7 +18,7 @@ namespace featherlib
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             KeyValueConfigurationCollection settings = config.AppSettings.Settings;
 
-            DbConnection connection = DbConnection.fromConfig(settings);
+            DbConnection connection = DbConnection.FromConfig(settings);
             Server server = new Server(connection);
             ServerConnector connector = new ServerConnector(server);
             Client client = new Client(connector);

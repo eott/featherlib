@@ -10,42 +10,42 @@ namespace featherlib
 {
     public class DbConnection
     {
-        public string connectionString { get; set; }
+        public string ConnectionString { get; set; }
 
-        public MySqlConnection db { get; set; }
+        public MySqlConnection Db { get; set; }
 
-        public DbConnectionStatus connectionStatus { get; set; }
+        public DbConnectionStatus ConnectionStatus { get; set; }
 
-        public string lastErrMsg { get; set; }
+        public string LastErrMsg { get; set; }
 
         public DbConnection(string host, string port, string database, string user, string password)
         {
-            this.connectionStatus = DbConnectionStatus.UNINITIALIZED;
+            this.ConnectionStatus = DbConnectionStatus.UNINITIALIZED;
 
-            this.connectionString = "server=" + host + ";port=" + port + ";userid="
+            this.ConnectionString = "server=" + host + ";port=" + port + ";userid="
                 + user + ";password=" + password + ";database=" + database;
-            this.db = new MySql.Data.MySqlClient.MySqlConnection(this.connectionString);
+            this.Db = new MySql.Data.MySqlClient.MySqlConnection(this.ConnectionString);
 
             try
             {
-                this.db.Open();
-                this.connectionStatus = DbConnectionStatus.CONNECTED;
+                this.Db.Open();
+                this.ConnectionStatus = DbConnectionStatus.CONNECTED;
             }
             catch (MySqlException ex)
             {
                 if (ex.Message.Contains("Authentication"))
                 {
-                    this.connectionStatus = DbConnectionStatus.UNAUTHORIZED;
+                    this.ConnectionStatus = DbConnectionStatus.UNAUTHORIZED;
                 }
                 else
                 {
-                    this.connectionStatus = DbConnectionStatus.UNCONNECTED;
+                    this.ConnectionStatus = DbConnectionStatus.UNCONNECTED;
                 }
-                this.lastErrMsg = ex.Message;
+                this.LastErrMsg = ex.Message;
             }
         }
 
-        public static DbConnection fromConfig(KeyValueConfigurationCollection conf)
+        public static DbConnection FromConfig(KeyValueConfigurationCollection conf)
         {
             return new DbConnection(
                 conf["db_host"].Value,
@@ -56,10 +56,10 @@ namespace featherlib
             );
         }
 
-        public MySqlDataReader query(string sql, Dictionary<string, string> parameters)
+        public MySqlDataReader Query(string sql, Dictionary<string, string> parameters)
         {
             MySqlCommand query = new MySqlCommand();
-            query.Connection = db;
+            query.Connection = Db;
             query.CommandText = sql;
             query.Prepare();
 

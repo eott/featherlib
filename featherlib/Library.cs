@@ -10,33 +10,33 @@ namespace featherlib
 {
     public class Library
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
-        public int ownerId { get; set; }
+        public int OwnerId { get; set; }
 
-        public DateTime created { get; set; }
+        public DateTime Created { get; set; }
 
-        public string name { get; set; }
+        public string Name { get; set; }
 
         public Library(int id, int userId, DateTime created, string name)
         {
-            this.id = id;
-            this.ownerId = userId;
-            this.created = created;
-            this.name = name;
+            this.Id = id;
+            this.OwnerId = userId;
+            this.Created = created;
+            this.Name = name;
         }
 
-        public static Library fromResultSet(ResultSet data)
+        public static Library FromResultSet(ResultSet data)
         {
             return new Library(
-                data.getInt32(0),
-                data.getInt32(1),
-                data.getDateTime(2),
-                data.getString(3)
+                data.GetInt32(0),
+                data.GetInt32(1),
+                data.GetDateTime(2),
+                data.GetString(3)
             );
         }
 
-        public static string getSelectQuery(bool singular)
+        public static string GetSelectQuery(bool singular)
         {
             string sql = @"
                 SELECT library_id, owner_id, created, name
