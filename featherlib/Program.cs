@@ -7,6 +7,11 @@ using System.Windows.Forms;
 
 namespace featherlib
 {
+    /// <summary>
+    /// The program's main class, containing the main() entry point. The code in
+    /// this class binds all components together and bootstraps all required
+    /// elements on startup.
+    /// </summary>
     static class Program
     {
         /// <summary>
